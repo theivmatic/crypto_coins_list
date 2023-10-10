@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -74,38 +75,62 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
         separatorBuilder: (context, index) => Divider(
           color: theme.dividerColor,
         ),
-        itemBuilder: (context, i) => ListTile(
-          leading: SvgPicture.asset(
-            'assets/svg/bitcoin_logo.svg',
-            height: 30,
-            width: 30,
-          ),
-          trailing: const Icon(Icons.arrow_forward),
-          title: Text(
-            'Bitcoin',
-            style: theme.textTheme.bodyMedium,
-          ),
-          subtitle: Text(
-            '200000\$',
-            style: theme.textTheme.labelSmall,
-          ),
-          onTap: () {
-            Navigator.of(context).pushNamed('/coin');
-          },
-        ),
+        itemBuilder: (context, i) {
+          //имя валюты в переменную
+          const coinName = 'Bitcoin';//видимо сюда будем потом передавать имя коина с апи
+
+          return ListTile(
+            leading: SvgPicture.asset(
+              'assets/svg/bitcoin_logo.svg',
+              height: 30,
+              width: 30,
+            ),
+            trailing: const Icon(Icons.arrow_forward),
+            title: Text(
+              coinName,
+              style: theme.textTheme.bodyMedium,
+            ),
+            subtitle: Text(
+              '200000\$',
+              style: theme.textTheme.labelSmall,
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                '/coin',
+                arguments: coinName,
+              );
+            },
+          );
+        },
       ),
     );
   }
 }
 
-class CryptoCoinScreen extends StatelessWidget {
+class CryptoCoinScreen extends StatefulWidget {
   const CryptoCoinScreen({super.key});
+
+  @override
+  State<CryptoCoinScreen> createState() => _CryptoCoinScreenState();
+}
+
+class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
+  String? coinName;
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    assert(args != null && args is String, 'You must provide String args');
+    coinName = args as String;
+    setState(() {});
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bitcoin'),
+        title: Text(coinName ?? '...'),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
