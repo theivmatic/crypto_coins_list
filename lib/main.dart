@@ -58,6 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Crypto Currencies List'),
       ),
       body: ListView.builder(
+        physics: const BouncingScrollPhysics(
+          decelerationRate: ScrollDecelerationRate.normal,
+        ),
         itemCount: 10,
         itemBuilder: (context, i) => ListTile(
           title: Text(
