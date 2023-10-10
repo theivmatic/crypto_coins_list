@@ -14,11 +14,16 @@ class CryptoCurrenciesListApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromARGB(255, 31, 31, 31),
         primarySwatch: Colors.yellow,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(
+        textTheme: TextTheme(
+          bodyMedium: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 20,
+          ),
+          labelSmall: TextStyle(
+            color: Colors.white.withOpacity(0.6),
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
           ),
         ),
       ),
@@ -45,6 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //Просто переменная для сокращения
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Crypto Currencies List'),
@@ -54,7 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, i) => ListTile(
           title: Text(
             'Bitcoin',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: theme.textTheme.bodyMedium,
+          ),
+          subtitle: Text(
+            '200000\$',
+            style: theme.textTheme.labelSmall,
           ),
         ),
       ),
