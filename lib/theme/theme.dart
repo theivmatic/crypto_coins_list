@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 final darkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
+    elevation: 0,
     backgroundColor: Color.fromARGB(255, 31, 31, 31),
     titleTextStyle: TextStyle(
       color: Colors.white,
@@ -27,4 +28,6 @@ final darkTheme = ThemeData(
   listTileTheme: const ListTileThemeData(iconColor: Colors.white),
   floatingActionButtonTheme:
       const FloatingActionButtonThemeData(backgroundColor: Colors.yellow),
+  progressIndicatorTheme:
+      const ProgressIndicatorThemeData(color: Colors.yellow),
 );
