@@ -11,7 +11,6 @@ class CryptoListScreen extends StatefulWidget {
 }
 
 class _CryptoListScreenState extends State<CryptoListScreen> {
-
   List<CryptoCoin>? _cryptoCoinsList;
 
   @override
@@ -20,24 +19,27 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
       appBar: AppBar(
         title: const Text('Crypto Currencies List'),
       ),
-      body: ListView.separated(
-        physics: const BouncingScrollPhysics(
-          decelerationRate: ScrollDecelerationRate.normal,
-        ),
-        itemCount: 10,
-        separatorBuilder: (context, index) => const Divider(),
-        itemBuilder: (context, i) {
-          //имя валюты в переменную
-          const coinName =
-              'Bitcoin'; //видимо сюда будем потом передавать имя коина с апи
-          return const CryptoCoinTile(coinName: coinName);
-        },
-      ),
+      body: (_cryptoCoinsList == null)
+          ? const SizedBox()
+          : ListView.separated(
+              physics: const BouncingScrollPhysics(
+                decelerationRate: ScrollDecelerationRate.normal,
+              ),
+              itemCount: _cryptoCoinsList!.length,
+              separatorBuilder: (context, index) => const Divider(),
+              itemBuilder: (context, i) {
+                //имя валюты в переменную
+                final coin = _cryptoCoinsList![i];
+                final coinName = coin.name;
+                return CryptoCoinTile(coinName: coinName);
+              },
+            ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.download),
-        onPressed: () async {
-        _cryptoCoinsList = await CryptoCoinsRepository().getCoinsList();
-      }),
+          child: const Icon(Icons.download),
+          onPressed: () async {
+            _cryptoCoinsList = await CryptoCoinsRepository().getCoinsList();
+            setState(() {});
+          }),
     );
   }
 }
