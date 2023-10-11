@@ -31,7 +31,8 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
                 //имя валюты в переменную
                 final coin = _cryptoCoinsList![i];
                 final coinName = coin.name;
-                return CryptoCoinTile(coinName: coinName);
+                final coinPriceUSD = coin.priceInUSD;
+                return CryptoCoinTile(coinName: coinName, coinPriceUSD: coinPriceUSD,);
               },
             ),
       floatingActionButton: FloatingActionButton(
