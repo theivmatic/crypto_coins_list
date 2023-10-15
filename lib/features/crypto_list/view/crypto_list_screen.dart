@@ -50,20 +50,31 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
               );
             }
             if (state is CryptoListLoadingFailure) {
-              return const Center(
+              return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Something went wrong',
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     Text(
                       'Please try again later',
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.copyWith(fontSize: 16),
                     ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('Try again'),
+                    )
                   ],
                 ),
-                
               );
             }
             return const Center(
