@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:crypto_coins_list/features/crypto_list/bloc/crypto_list_bloc.dart';
 import 'package:crypto_coins_list/features/crypto_list/widgets/widgets.dart';
 import 'package:crypto_coins_list/repositories/crypto_coins/crypto_coins.dart';
@@ -32,7 +34,11 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
           title: const Text('Crypto Currencies List'),
         ),
         body: RefreshIndicator(
-          onRefresh: () async {},
+          onRefresh: () async {
+            final completer = Completer();
+            _cryptoListBloc.add(LoadCryptoList(completer: completer));
+            return completer.future;
+          },
           child: BlocBuilder<CryptoListBloc, CryptoListState>(
             bloc: _cryptoListBloc,
             builder: (context, state) {
