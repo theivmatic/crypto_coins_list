@@ -70,8 +70,13 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
                       height: 30,
                     ),
                     TextButton(
-                      onPressed: () {},
-                      child: Text('Try again'),
+                      onPressed: () {
+                        _cryptoListBloc.add(LoadCryptoList());
+                      },
+                      child: const Text(
+                        'Try again',
+                        style: TextStyle(color: Colors.yellow),
+                      ),
                     )
                   ],
                 ),

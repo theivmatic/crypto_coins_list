@@ -30,4 +30,10 @@ final darkTheme = ThemeData(
       const FloatingActionButtonThemeData(backgroundColor: Colors.yellow),
   progressIndicatorTheme:
       const ProgressIndicatorThemeData(color: Colors.yellow),
+  textButtonTheme: const TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStatePropertyAll(Colors.yellow),
+      // textStyle: MaterialStatePropertyAll(TextStyle(color: Colors.yellow)),
+    ),
+  ),
 );
